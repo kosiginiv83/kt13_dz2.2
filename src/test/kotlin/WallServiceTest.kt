@@ -8,7 +8,7 @@ class WallServiceTest {
     fun addingPost() {
         val wall = WallService
         wall.add(Post("test"))
-        assertEquals(10, wall.getPosts().size)
+        assertEquals(1, wall.getPosts().size)
     }
 
     @Test
