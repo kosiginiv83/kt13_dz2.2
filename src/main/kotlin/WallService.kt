@@ -1,12 +1,11 @@
-object WallService {
-    val ownerId: Int = 123
+class WallService(private val ownerId: Int) {
     private var posts: Array<Post> = emptyArray()
     private var postCount = 0
 
     fun getPosts() = posts
 
     fun add(post: Post): Post {
-        val newPost = post.copy(id = ++postCount)
+        val newPost = post.copy(id = ++postCount, ownerId = ownerId)
         posts += newPost
         return newPost
     }

@@ -1,5 +1,5 @@
 package postFields
 
-class Views(
+data class Views(
         val count: Int = 0,
 )

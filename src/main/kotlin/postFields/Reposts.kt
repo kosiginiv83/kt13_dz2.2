@@ -1,6 +1,6 @@
 package postFields
 
-class Reposts(
+data class Reposts(
         val count: Int = 0,
         val userReposted: Boolean = false,
 )

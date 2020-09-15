@@ -1,10 +1,10 @@
 import postFields.*
-import java.time.LocalDateTime
 import kotlin.random.Random
 
 
 data class Post(
-        var text: String,
+        val text: String,
+        val ownerId: Int = -1,
         val id: Int = -1,
         val replyOwnerId: Int = 0,
         val replyPostId: Int = 0,
@@ -24,9 +24,7 @@ data class Post(
         val isFavorite: Boolean = false,
         val postponedId: Int = 0,
 
-        var fromId: Int = Random.nextInt(1_000_000),
-        var createdBy: Int = Random.nextInt(1_000_000),
-        var ownerId: Int? = WallService.ownerId,
-        var date: Long = java.time.Instant.now().toEpochMilli(),
-//        var date: LocalDateTime? = LocalDateTime.now(),
+        val fromId: Int = Random.nextInt(1_000_000),
+        val createdBy: Int = Random.nextInt(1_000_000),
+        val date: Long = java.time.Instant.now().toEpochMilli(),
 )
