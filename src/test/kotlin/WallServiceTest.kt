@@ -26,4 +26,20 @@ class WallServiceTest {
         val newPost = Post("new")
         assertFalse(wall.update(newPost))
     }
+
+    @Test
+    fun copyHistoryOfRepost() {
+        val wall = WallService(ownerId = 4)
+        wall.add(Post("repost", postType = PostType.COPY))
+        var copyHistory = wall.getPosts().get(0).copyHistory
+        copyHistory = copyHistory!!.plus(Post("text"))
+        assertEquals(1, copyHistory.size)
+    }
+
+    @Test
+    fun copyHistoryOfPost() {
+        val wall = WallService(ownerId = 4)
+        wall.add(Post("post"))
+        assertNull(wall.getPosts().get(0).copyHistory)
+    }
 }
