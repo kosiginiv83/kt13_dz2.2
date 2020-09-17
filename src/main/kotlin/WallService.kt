@@ -22,7 +22,8 @@ class WallService(private val ownerId: Int) {
 
     fun printPosts() {
         println("\n\tСписок постов:")
-        posts.forEach { println("id: ${it.id}, date: ${it.date}, text: '${it.text}'") }
+        posts.forEach { println("id: ${it.id}, date: ${it.date}, text: '${it.text}', " +
+                "type: ${it.postType}") }
         println()
     }
 }

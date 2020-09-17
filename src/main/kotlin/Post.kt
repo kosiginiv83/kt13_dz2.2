@@ -14,7 +14,7 @@ data class Post(
         val likes: Likes = Likes(),
         val reposts: Reposts = Reposts(),
         val views: Views = Views(),
-        val postType: String = "post",
+        val postType: PostType = PostType.POST,
         val signerId: Int? = null,
         val canPin: Boolean = true,
         val canDelete: Boolean = true,
@@ -29,5 +29,16 @@ data class Post(
         val date: Long = java.time.Instant.now().toEpochMilli(),
 
         val postSource: PostSource? = null,
+        val geo: Geo? = null,
+) {
+    var copyHistory: Array<Post>? = emptyArray()
+        get() = if (postType == PostType.COPY) field else null
+}
 
-)
+enum class PostType(val type: String) {
+    POST("post"),
+    COPY("copy"),
+    REPLY("reply"),
+    POSTPONE("postpone"),
+    SUGGEST("suggest"),
+}
