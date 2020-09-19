@@ -24,7 +24,7 @@ fun main() {
     println(wall.getPosts()[2].copyHistory)
 
     wall.add(Post("With audio attachment"))
-    wall.getPosts().last().attachments += AudioAttachment(id = 1, ownerId = wall.ownerId,
+    wall.getPosts().last().attachments += Attachment.AudioAttachment(id = 1, ownerId = wall.ownerId,
             artist = "Artist1", title = "Title1", duration = 100, url = "link/to/audio/file1")
     println(wall.getPosts().last().attachments[0].toString())
 }

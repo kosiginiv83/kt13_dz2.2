@@ -1,4 +1,4 @@
-import attachments.AudioAttachment
+import attachments.*
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -16,7 +16,7 @@ class WallServiceTest {
     fun updateExistingPost() {
         val wall = WallService(2)
         wall.add(Post("test"))
-        val updated = wall.getPosts().get(0).copy("updated")
+        val updated = wall.getPosts()[0].copy("updated")
         assertTrue(wall.update(updated))
     }
 
@@ -32,7 +32,7 @@ class WallServiceTest {
     fun copyHistoryOfRepost() {
         val wall = WallService(ownerId = 4)
         wall.add(Post("repost", postType = PostType.COPY))
-        var copyHistory = wall.getPosts().get(0).copyHistory
+        var copyHistory = wall.getPosts()[0].copyHistory
         copyHistory = copyHistory!!.plus(Post("text"))
         assertEquals(1, copyHistory.size)
     }
@@ -41,14 +41,14 @@ class WallServiceTest {
     fun copyHistoryOfPost() {
         val wall = WallService(ownerId = 5)
         wall.add(Post("post"))
-        assertNull(wall.getPosts().get(0).copyHistory)
+        assertNull(wall.getPosts()[0].copyHistory)
     }
 
     @Test
     fun addAttachToPost_Audio() {
         val wall = WallService(ownerId = 6)
         wall.add(Post("With audio attachment"))
-        val attachAudio = AudioAttachment(id = 1, ownerId = wall.ownerId,
+        val attachAudio = Attachment.AudioAttachment(id = 1, ownerId = wall.ownerId,
                 artist = "Artist1", title = "Title1", duration = 100, url = "link/to/audio/file1")
         wall.getPosts().last().addAttachment(attachAudio)
         assertEquals(1, wall.getPosts().last().attachments.size)
