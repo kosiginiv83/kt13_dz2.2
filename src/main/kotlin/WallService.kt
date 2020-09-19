@@ -1,4 +1,4 @@
-class WallService(private val ownerId: Int) {
+class WallService(val ownerId: Int) {
     private var posts: Array<Post> = emptyArray()
     private var postCount = 0
 

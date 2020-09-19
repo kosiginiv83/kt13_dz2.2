@@ -3,7 +3,7 @@ package attachments
 data class AudioAttachment(
         val id: Int,
         val ownerId: Int,
-        val date: Long,
+        val date: Long = java.time.Instant.now().toEpochMilli(),
         val artist: String,
         val title: String,
         val duration: Int,
