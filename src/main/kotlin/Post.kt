@@ -1,3 +1,4 @@
+import attachments.Attachment
 import postFields.*
 import kotlin.random.Random
 
@@ -33,6 +34,8 @@ data class Post(
 ) {
     var copyHistory: Array<Post>? = emptyArray()
         get() = if (postType == PostType.COPY) field else null
+
+    val attachments: Array<Attachment> = emptyArray()
 }
 
 enum class PostType(val type: String) {
