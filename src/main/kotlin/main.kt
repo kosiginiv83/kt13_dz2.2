@@ -1,3 +1,6 @@
+import attachments.*
+
+
 fun main() {
     val wall = WallService(123)
     wall.add(Post("saontehuaostneu"))
@@ -19,4 +22,9 @@ fun main() {
     wall.getPosts()[2].copyHistory?.forEach { println("\tHistory post: $it") }
     println(wall.getPosts()[1].copyHistory)
     println(wall.getPosts()[2].copyHistory)
+
+    wall.add(Post("With audio attachment"))
+    wall.getPosts().last().attachments += AudioAttachment(id = 1, ownerId = wall.ownerId,
+            artist = "Artist1", title = "Title1", duration = 100, url = "link/to/audio/file1")
+    println(wall.getPosts().last().attachments[0].toString())
 }
