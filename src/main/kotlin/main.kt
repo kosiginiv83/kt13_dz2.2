@@ -24,7 +24,19 @@ fun main() {
     println(wall.getPosts()[2].copyHistory)
 
     wall.add(Post("With audio attachment"))
-    wall.getPosts().last().attachments += AudioAttachment(id = 1, ownerId = wall.ownerId,
+    wall.getPosts().last().attachments += Attachment.AudioAttachment(id = 1, ownerId = wall.ownerId,
             artist = "Artist1", title = "Title1", duration = 100, url = "link/to/audio/file1")
     println(wall.getPosts().last().attachments[0].toString())
+
+    println()
+    val comment1 = Comment(456, "First comment")
+    val comment2 = Comment(456, "Second comment")
+    println(wall.createComment(1, comment1))
+//    println(wall.createComment(5, comment2))
+
+    println()
+    println(wall.reportComment(1, 0))
+    println(wall.getReports()[0].reason)
+    println(wall.reportComment(10, 0))
+    println(wall.reportComment(1, 10))
 }
