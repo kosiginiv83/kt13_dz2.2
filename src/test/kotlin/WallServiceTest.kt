@@ -69,4 +69,31 @@ class WallServiceTest {
         val comment = Comment(456, "Comment to fake post")
         wall.createComment(2, comment)
     }
+
+    @Test
+    fun addReportToComment_Success() {
+        val wall = WallService(ownerId = 9)
+        wall.add(Post("Adding report"))
+        val comment = Comment(fromId = 456, text = "For report")
+        wall.createComment(1, comment)
+        assertTrue(wall.reportComment(1, 0))
+    }
+
+    @Test
+    fun addReportToComment_CommentNotFoundException() {
+        val wall = WallService(ownerId = 10)
+        wall.add(Post("CommentNotFoundException"))
+        val comment = Comment(fromId = 456, text = "For report")
+        wall.createComment(postId = 1, comment)
+        assertFalse(wall.reportComment(commentId = 2, reasonId = 0))
+    }
+
+    @Test
+    fun addReportToComment_ReportReasonNotExistException() {
+        val wall = WallService(ownerId = 11)
+        wall.add(Post("ReportReasonNotExistException"))
+        val comment = Comment(fromId = 456, text = "For report")
+        wall.createComment(postId = 1, comment)
+        assertFalse(wall.reportComment(commentId = 1, reasonId = 10))
+    }
 }
