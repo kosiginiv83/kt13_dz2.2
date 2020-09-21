@@ -53,4 +53,20 @@ class WallServiceTest {
         wall.getPosts().last().addAttachment(attachAudio)
         assertEquals(1, wall.getPosts().last().attachments.size)
     }
+
+    @Test
+    fun addCommentToPost_Success() {
+        val wall = WallService(ownerId = 7)
+        wall.add(Post("Post"))
+        val comment = Comment(456, "Comment to existing post")
+        assertEquals(1, wall.createComment(1, comment))
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun addCommentToPost_Fail() {
+        val wall = WallService(ownerId = 8)
+        wall.add(Post("Post"))
+        val comment = Comment(456, "Comment to fake post")
+        wall.createComment(2, comment)
+    }
 }
