@@ -36,10 +36,6 @@ data class Post(
         get() = if (postType == PostType.COPY) field else null
 
     var attachments: Array<Attachment> = emptyArray()
-
-    fun addAttachment(attach: Attachment) {
-        attachments += attach
-    }
 }
 
 enum class PostType(val type: String) {

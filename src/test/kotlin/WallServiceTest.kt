@@ -50,7 +50,7 @@ class WallServiceTest {
         wall.add(Post("With audio attachment"))
         val attachAudio = Attachment.AudioAttachment(id = 1, ownerId = wall.ownerId,
                 artist = "Artist1", title = "Title1", duration = 100, url = "link/to/audio/file1")
-        wall.getPosts().last().addAttachment(attachAudio)
+        wall.addAttachmentToPost(wall.getPosts().last().id, attachAudio)
         assertEquals(1, wall.getPosts().last().attachments.size)
     }
 

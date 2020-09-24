@@ -1,3 +1,5 @@
+import attachments.Attachment
+
 class WallService(val ownerId: Int) {
     private var posts: Array<Post> = emptyArray()
     private var comments: Array<Comment> = emptyArray()
@@ -24,6 +26,14 @@ class WallService(val ownerId: Int) {
                 posts[foundInd] = post.copy(date = post.date)
                 true
             }
+        }
+    }
+
+    fun addAttachmentToPost(postId: Int?, attach: Attachment?) {
+        if (attach == null) throw AttachmentIsNull("Пустое вложение")
+        when (val foundPost = this.posts.find { it.id == postId }) {
+            null -> throw PostNotFoundException("Поста с таким ID не существует")
+            else -> foundPost.attachments += attach
         }
     }
 
@@ -56,6 +66,10 @@ class WallService(val ownerId: Int) {
                 throw CommentNotFoundException("Комментарий не найден")
             }
             reports += Report(commentId, reasonId)
+        } catch(e: ReportReasonNotExistException) {
+            e.printStackTrace()
+        } catch(e: CommentNotFoundException) {
+            e.printStackTrace()
         } finally {
             return result
         }
